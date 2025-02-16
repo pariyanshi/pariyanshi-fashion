@@ -40,20 +40,25 @@
                 email: email
             };
 
-            $.ajax({
-                url: "https://script.google.com/macros/s/AKfycbznw914SzIzcXNGU7fE6tggkRO9Gv4GgeVI5PVFo79WRMdQGsQfWI-ODdEXrJUTNOCXeA/exec", // Replace with your Apps Script URL
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(formData),
-                crossDomain: true,
-                success: function (response) {
+            fetch("https://script.google.com/macros/s/AKfycbyx98QTIMx-mEmNh3mYd4-cK96V-inDN8XIR-NtVCniJ3aBYFJDBEPPVIm2uUXTZpdI5w/exec", {
+                redirect: "follow",
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8",
+                    // "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Success:", data);
                     $(".subscription-success").text("Subscribed successfully!").css("color", "green");
                     $("#subscribeEmail").val("");
-                },
-                error: function () {
+                })
+                .catch(error => {
+                    console.error("Error:", error);
                     $(".subscription-success").text("Error! Please try again.").css("color", "red");
-                }
-            });
+                });
         });
 
     });
