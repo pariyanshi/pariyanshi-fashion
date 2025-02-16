@@ -41,10 +41,11 @@
             };
 
             $.ajax({
-                url: "https://script.google.com/macros/s/AKfycbwwuzLZKMgvRlmLZqpfVHgle1YFWUKE5uB1vteNUSKN3-9ejHkGVpNTREsvW9I9lplCsw/exec", // Replace with your Apps Script URL
+                url: "https://script.google.com/macros/s/AKfycbznw914SzIzcXNGU7fE6tggkRO9Gv4GgeVI5PVFo79WRMdQGsQfWI-ODdEXrJUTNOCXeA/exec", // Replace with your Apps Script URL
                 type: "POST",
                 contentType: "application/json",
                 data: JSON.stringify(formData),
+                crossDomain: true,
                 success: function (response) {
                     $(".subscription-success").text("Subscribed successfully!").css("color", "green");
                     $("#subscribeEmail").val("");
